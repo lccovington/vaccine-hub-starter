@@ -4,7 +4,10 @@ const router = express.Router()
 
 router.post("/login", async(req, res, next) => {
         try {
-            // takes user name and password to login them in
+
+            const user = await User.login(req.body)
+            return res.status(200).json({ user })
+
         } catch (error) {
             next(error)
         }
@@ -12,8 +15,10 @@ router.post("/login", async(req, res, next) => {
 
 router.post("/register", async(req, res, next) => {
     try {
-        // takes user email and password and other stuff to register
-        // them
+
+        const user = await User.register(req.body)
+        return res.status(201).json({ user })
+        
     } catch (error) {
         next(error)
     }
