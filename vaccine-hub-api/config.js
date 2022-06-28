@@ -14,7 +14,10 @@ function getDatabaseURL () {
 
 }
 
+const BCRYPT_WORK_FACTOR = 13
+
 module.exports = {
     PORT,
-    getDatabaseURL
+    getDatabaseURL,
+    BCRYPT_WORK_FACTOR
 }
