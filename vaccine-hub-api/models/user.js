@@ -20,7 +20,7 @@ class User {
 
         const requiredFields = ["email", 'password']
         requiredFields.forEach(field => {
-            if (!creds.hasOwnProperty(field)) {
+            if (!credentials.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body.`)
             }
         })
