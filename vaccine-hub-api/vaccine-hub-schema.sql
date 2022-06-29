@@ -1,7 +1,3 @@
---  In vaccine-hub-schema.sql, write the SQL needed to create 
---  a new users table with id, password, 
---  first_name, last_name, email, location, and date columns
-
 CREATE TABLE users (
     id           SERIAL PRIMARY KEY,
     password     TEXT NOT NULL,

@@ -34,7 +34,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Invalid email/password combo")
+        throw new UnauthorizedError("Invalid email/password")
     }
 
     static async register(credentials) {
@@ -49,7 +49,7 @@ class User {
 
         const existingUser = await User.fetchUserByEmail(credentials.email)
         if (existingUser) {
-            throw new BadRequestError(`User already `)
+            throw new BadRequestError(`User already exists`)
         }
 
         if (credentials.email.indexOf('@') <= 0) {
@@ -79,6 +79,30 @@ class User {
 
         return User.makePublicUser(user)
     }
+
+    static async update(credentials) {
+
+        const requiredFields = ["email", 'password', 'location', 'date']
+
+        requiredFields.forEach(field => {
+            if (!credentials.hasOwnProperty(field)) {
+                throw new BadRequestError(`Missing ${field} in request body.`)
+            }
+        })
+ 
+        const user = await User.fetchUserByEmail(credentials.email)
+
+        if (user) {
+            const isValid = await bcrypt.compare(credentials.password, user.password)
+            if (isValid) {
+                console.log("Something goes here Idk what yet")
+            }
+        }
+    
+
+        throw new UnauthorizedError("Invalid email/password")
+    }
+
 
     static async fetchUserByEmail(email) {
         if (!email) {
